@@ -4,8 +4,8 @@ let play = true;
 const setupMap = () => {
     let mapSize = 0;
     let isValid = false;
-
-    while (!isValid) {
+    
+    while(!isValid) {
         mapSize = Number(prompt("Wybierz wielkość planszy (liczba musi nalezec do N+)"));
         isValid = Number.isInteger(mapSize) && mapSize > 0;
     }
@@ -16,18 +16,18 @@ const setup = () => {
     const p1 = prompt("Wybierz znak dla pierwszego gracza");
     const p2 = prompt("Wybierz znak dla drugiego gracza");
 
-    return { p1, p2 };
+    return {p1, p2};
 };
 
 const createUIBoard = (mapSize) => {
     const divRoot = document.getElementById('board');
     const arrayBoard = [];
     const board = [];
-    for (let i = 0; i < mapSize; i++) {
+    for( let i=0; i<mapSize; i++) {
         board.push([]);
     }
     board.forEach(arr => {
-        for (let i = 0; i < mapSize; i++) {
+        for( let i=0; i<mapSize; i++) {
             const element = document.createElement('div');
             element.classList.add('cell');
             const cell = {
@@ -48,7 +48,7 @@ const bot = (board, player) => {
     const i = Math.floor(Math.random() * 3);
     const j = Math.floor(Math.random() * 3);
 
-    if (board[i][j].state) {
+    if(board[i][j].state){
         return bot(board, player);
     }
     board[i][j].state = player
@@ -56,19 +56,19 @@ const bot = (board, player) => {
     board[i][j].x = j
 };
 
-const isGameWonForElement = (board, cell, mapSize) => {
-    const { x, y, state } = cell
+const isGameWonForElement = (board, cell, mapSize) =>{
+    const {x, y, state} = cell 
     const row = board[y];
     const column = board[x];
     const isRowWinning = row.every(item => item.state === state);
     const isColumnWinning = column.every(item => item.state === state);
     let isDiagonalWinning = true
-    for (let i = 0; i < mapSize; i++) {
-        if (board[i][i].state != cell.state) {
+    for(let i=0; i<mapSize; i++){
+        if(board[i][i].state != cell.state){
             isDiagonalWinning = false
         }
     }
-    board[0][0].state === cell.state && board[1][1].state && board[2][2].state
+    board[0][0].state === cell.state && board[1][1].state && board[2][2].state 
     return isRowWinning || isColumnWinning || isDiagonalWinning
 }
 
@@ -77,7 +77,7 @@ const isPlayerWinning = (arrayBoard, board, player, mapSize) => {
         return isGameWonForElement(board, cell, mapSize);
     })
 }
-const isThereAnyValidMove = (arrayBoard) => {
+const isThereAnyValidMove = (arrayBoard) =>{
     return arrayBoard.filter(item => item.state === null).length
 }
 
@@ -99,7 +99,7 @@ const render = (arrayBoard) => {
 const gameOn = async ({
     p1, p2, board, arrayBoard, mapSize
 }) => {
-    while (true) {
+    while(true) {
         await delay()
         bot(board, p1)
         render(arrayBoard);
@@ -108,10 +108,10 @@ const gameOn = async ({
         const isP1Won = isPlayerWinning(arrayBoard, board, p1, mapSize);
         let isAnyValidMove = isThereAnyValidMove(arrayBoard);
 
-        if (isP1Won) {
+        if(isP1Won) {
             return p1
         }
-        if (!isAnyValidMove) {
+        if(!isAnyValidMove) {
             return 'draw';
         }
 
@@ -123,10 +123,10 @@ const gameOn = async ({
         const isP2Won = isPlayerWinning(arrayBoard, board, p2, mapSize);
         isAnyValidMove = isThereAnyValidMove(arrayBoard);
 
-        if (isP2Won) {
+        if(isP2Won) {
             return p2
         }
-        if (!isAnyValidMove) {
+        if(!isAnyValidMove) {
             return 'draw';
         }
     }
@@ -134,16 +134,16 @@ const gameOn = async ({
 
 (async () => {
     // const mapSize = setupMap();
-    const { p1, p2 } = setup();
+    const {p1, p2} = setup();
     const mapSize = 3;
     // const {p1, p2} = {  p1: 'X', p2: 'Y'};
     const { board, arrayBoard } = createUIBoard(mapSize);
-
+    
     const result = await gameOn({
         p1, p2, board, arrayBoard, mapSize
     });
-
-    if (result == 'draw') {
+    
+    if(result == 'draw'){
         alert('Draw')
         return
     }

@@ -134,9 +134,9 @@ const gameOn = async ({
 
 (async () => {
     // const mapSize = setupMap();
-    const {p1, p2} = setup();
+    // const {p1, p2} = setup();
     const mapSize = 3;
-    // const {p1, p2} = {  p1: 'X', p2: 'Y'};
+    const {p1, p2} = {  p1: 'x', p2: 'o'};
     const { board, arrayBoard } = createUIBoard(mapSize);
     
     const result = await gameOn({

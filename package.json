@@ -1,0 +1,23 @@
+{
+  "name": "ox",
+  "version": "1.0.0",
+  "description": "Created website OX game in javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "style": "sass --watch scss:css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liVyO9/OX-game.git"
+  },
+  "author": "Jakub Sitnik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liVyO9/OX-game/issues"
+  },
+  "homepage": "https://github.com/liVyO9/OX-game#readme",
+  "dependencies": {
+    "sass": "^1.52.3"
+  }
+}

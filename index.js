@@ -56,6 +56,10 @@ const bot = (board, player) => {
     board[i][j].x = j
 };
 
+const playerMoveOnClick = (board) => {
+    console.log({"board": board})
+}
+
 const isGameWonForElement = (board, cell, mapSize) =>{
     const {x, y, state} = cell 
     const row = board[y];
